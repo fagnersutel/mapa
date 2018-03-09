@@ -124,15 +124,17 @@ leaflet(df) %>% addTiles() %>%
 
 # first 20 quakes
 df.20 <- quakes[1:20,]
-
+df.20$mag[20] <- 10.1
 getColor <- function(quakes) {
   sapply(quakes$mag, function(mag) {
     if(mag <= 4) {
-      "green"
+      "blue"
     } else if(mag <= 5) {
-      "orange"
-    } else {
+      "green"
+    } else if(mag <= 7) {
       "red"
+    } else {
+      "black"
     } })
 }
 
@@ -147,6 +149,6 @@ leaflet(df.20) %>% addTiles() %>%
   addAwesomeMarkers(~long, ~lat, icon=icons, label=~as.character(paste(mag, stations, depth, sep = ", ")), clusterOptions = markerClusterOptions())
 
 
-leaflet(quakes) %>% addTiles() %>% addMarkers(
-  clusterOptions = markerClusterOptions()
-)
+#leaflet(quakes) %>% addTiles() %>% addMarkers(
+#  clusterOptions = markerClusterOptions()
+#)
